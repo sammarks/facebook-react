@@ -23,10 +23,10 @@ export const enableSchedulerTracing = __PROFILE__;
 export const enableSuspenseServerRenderer = false;
 export const enableSelectiveHydration = false;
 export const enableLazyElements = false;
+export const enableCache = false;
 export const enableSchedulerDebugging = false;
 export const disableJavaScriptURLs = false;
 export const disableInputAttributeSyncing = false;
-export const enableFundamentalAPI = false;
 export const enableScopeAPI = true;
 export const enableCreateEventHandleAPI = false;
 export const warnAboutUnmockedScheduler = true;
@@ -43,16 +43,22 @@ export const warnAboutSpreadingKeyToJSX = false;
 export const enableComponentStackLocations = true;
 export const enableLegacyFBSupport = false;
 export const enableFilterEmptyStringAttributesDOM = false;
+export const disableNativeComponentFrames = false;
+export const skipUnmountedBoundaries = false;
 
 export const enableNewReconciler = false;
 export const deferRenderPhaseUpdateToNextBatch = true;
 export const decoupleUpdatePriorityFromScheduler = false;
 export const enableDiscreteEventFlushingChange = false;
 
-export const enableDoubleInvokingEffects = false;
+export const enableDoubleInvokingEffects = true;
 export const enableUseRefAccessWarning = false;
 
 export const enableRecursiveCommitTraversal = false;
+export const disableSchedulerTimeoutInWorkLoop = false;
+export const enableNonInterruptingNormalPri = false;
+export const enableDiscreteEventMicroTasks = false;
+export const enableNativeEventPriorityInference = false;
 
 // Flow magic to verify the exports of this file match the original version.
 // eslint-disable-next-line no-unused-vars

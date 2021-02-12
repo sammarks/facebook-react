@@ -52,15 +52,13 @@ export const enableSelectiveHydration = __EXPERIMENTAL__;
 
 // Flight experiments
 export const enableLazyElements = __EXPERIMENTAL__;
+export const enableCache = __EXPERIMENTAL__;
 
 // Only used in www builds.
 export const enableSchedulerDebugging = false;
 
 // Disable javascript: URL strings in href for XSS protection.
 export const disableJavaScriptURLs = false;
-
-// Experimental Host Component support.
-export const enableFundamentalAPI = false;
 
 // Experimental Scope support.
 export const enableScopeAPI = false;
@@ -97,6 +95,14 @@ export const warnAboutSpreadingKeyToJSX = false;
 export const enableComponentStackLocations = true;
 
 export const enableNewReconciler = false;
+
+export const disableNativeComponentFrames = false;
+
+// Errors that are thrown while unmounting (or after in the case of passive effects)
+// should bypass any error boundaries that are also unmounting (or have unmounted)
+// and be handled by the nearest still-mounted boundary.
+// If there are no still-mounted boundaries, the errors should be rethrown.
+export const skipUnmountedBoundaries = false;
 
 // --------------------------
 // Future APIs to be deprecated
@@ -138,3 +144,11 @@ export const enableDoubleInvokingEffects = false;
 export const enableUseRefAccessWarning = false;
 
 export const enableRecursiveCommitTraversal = false;
+
+export const disableSchedulerTimeoutInWorkLoop = false;
+
+export const enableNonInterruptingNormalPri = false;
+
+export const enableDiscreteEventMicroTasks = false;
+
+export const enableNativeEventPriorityInference = false;

@@ -26,8 +26,14 @@ export const {
   deferRenderPhaseUpdateToNextBatch,
   decoupleUpdatePriorityFromScheduler,
   enableDebugTracing,
+  skipUnmountedBoundaries,
   enableDoubleInvokingEffects,
   enableUseRefAccessWarning,
+  disableNativeComponentFrames,
+  disableSchedulerTimeoutInWorkLoop,
+  enableNonInterruptingNormalPri,
+  enableDiscreteEventMicroTasks,
+  enableNativeEventPriorityInference,
 } = dynamicFeatureFlags;
 
 // On WWW, __EXPERIMENTAL__ is used for a new modern build.
@@ -58,14 +64,13 @@ export const enableSuspenseServerRenderer = true;
 export const enableSelectiveHydration = true;
 
 export const enableLazyElements = true;
+export const enableCache = true;
 
 export const disableJavaScriptURLs = true;
 
 export const disableModulePatternComponents = true;
 
 export const enableCreateEventHandleAPI = true;
-
-export const enableFundamentalAPI = false;
 
 export const enableScopeAPI = true;
 

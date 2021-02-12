@@ -1,12 +1,25 @@
 'use strict';
 
-const register = require('react-transport-dom-webpack/node-register');
+const register = require('react-server-dom-webpack/node-register');
 register();
 
 const babelRegister = require('@babel/register');
+const path = require('path');
 
 babelRegister({
-  ignore: [/\/(build|node_modules)\//],
+  babelrc: false,
+  ignore: [
+    /\/(build|node_modules)\//,
+    function(file) {
+      if ((path.dirname(file) + '/').startsWith(__dirname + '/')) {
+        // Ignore everything in this folder
+        // because it's a mix of CJS and ESM
+        // and working with raw code is easier.
+        return true;
+      }
+      return false;
+    },
+  ],
   presets: ['react-app'],
   plugins: ['@babel/transform-modules-commonjs'],
 });
@@ -16,12 +29,21 @@ const app = express();
 
 // Application
 app.get('/', function(req, res) {
-  if (process.env.NODE_ENV === 'development') {
-    for (var key in require.cache) {
-      delete require.cache[key];
-    }
-  }
   require('./handler.server.js')(req, res);
+});
+
+app.get('/todos', function(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.json([
+    {
+      id: 1,
+      text: 'Shave yaks',
+    },
+    {
+      id: 2,
+      text: 'Eat kale',
+    },
+  ]);
 });
 
 app.listen(3001, () => {

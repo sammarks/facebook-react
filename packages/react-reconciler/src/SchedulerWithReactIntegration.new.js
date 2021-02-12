@@ -22,7 +22,7 @@ import {
   SyncLanePriority,
   getCurrentUpdateLanePriority,
   setCurrentUpdateLanePriority,
-} from './ReactFiberLane';
+} from './ReactFiberLane.new';
 
 const {
   unstable_runWithPriority: Scheduler_runWithPriority,
@@ -56,8 +56,6 @@ if (enableSchedulerTracing) {
 export type SchedulerCallback = (isSync: boolean) => SchedulerCallback | null;
 
 type SchedulerCallbackOptions = {timeout?: number, ...};
-
-const fakeCallbackNode = {};
 
 // Except for NoPriority, these correspond to Scheduler priorities. We use
 // ascending numbers so we can compare them like numbers. They start at 90 to
@@ -147,6 +145,8 @@ export function scheduleSyncCallback(callback: SchedulerCallback) {
   if (syncQueue === null) {
     syncQueue = [callback];
     // Flush the queue in the next tick, at the earliest.
+    // TODO: Figure out how to remove this It's only here as a last resort if we
+    // forget to explicitly flush.
     immediateQueueCallbackNode = Scheduler_scheduleCallback(
       Scheduler_ImmediatePriority,
       flushSyncCallbackQueueImpl,
@@ -156,13 +156,10 @@ export function scheduleSyncCallback(callback: SchedulerCallback) {
     // we already scheduled one when we created the queue.
     syncQueue.push(callback);
   }
-  return fakeCallbackNode;
 }
 
 export function cancelCallback(callbackNode: mixed) {
-  if (callbackNode !== fakeCallbackNode) {
-    Scheduler_cancelCallback(callbackNode);
-  }
+  Scheduler_cancelCallback(callbackNode);
 }
 
 export function flushSyncCallbackQueue() {
